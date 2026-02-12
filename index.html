@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shelter Dashboard</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f4f4f4;
+            color: #333;
+        }
+        .dashboard-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .card {
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            text-align: center;
+        }
+        .card h2 {
+            color: #0056b3;
+            margin-top: 0;
+        }
+        .card p {
+            font-size: 1.2em;
+            color: #555;
+        }
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+            color: #0056b3;
+        }
+        .data-value {
+            font-size: 2.5em;
+            font-weight: bold;
+            color: #28a745;
+        }
+        .trend-positive {
+            color: #28a745;
+            font-weight: bold;
+        }
+        .trend-negative {
+            color: #dc3545;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <h1 class="header">Shelter Dashboard</h1>
+
+    <div class="dashboard-container">
+        <div class="card">
+            <h2>Forecasted Occupancy</h2>
+            <p>Next 7 days:</p>
+            <p id="forecastedOccupancy" class="data-value">Loading...</p>
+        </div>
+
+        <div class="card">
+            <h2>Seasonal Trends</h2>
+            <p>Current Season (Winter):</p>
+            <p id="seasonalTrends">Loading...</p>
+        </div>
+
+        <div class="card">
+            <h2>AI Intake Predictions</h2>
+            <p>Next 24 hours:</p>
+            <p id="aiIntakePredictions" class="data-value">Loading...</p>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Placeholder data simulation
+            const simulateData = () => {
+                // E-001-F-002-S-001: Forecasted Occupancy
+                const occupancy = Math.floor(Math.random() * (100 - 60 + 1)) + 60; // 60-100 people
+                document.getElementById('forecastedOccupancy').textContent = `${occupancy} people`;
+
+                // E-001-F-003-S-001: Seasonal Trends
+                const currentMonth = new Date().getMonth();
+                let seasonTrend = '';
+                if (currentMonth >= 2 && currentMonth <= 4) {
+                    seasonTrend = 'Spring: Moderate intake expected.';
+                } else if (currentMonth >= 5 && currentMonth <= 7) {
+                    seasonTrend = 'Summer: Higher intake possible due to heat.';
+                } else if (currentMonth >= 8 && currentMonth <= 10) {
+                    seasonTrend = 'Autumn: Stable intake expected.';
+                } else {
+                    seasonTrend = 'Winter: Increased demand due to cold weather. <span class="trend-negative">High demand.</span>';
+                }
+                document.getElementById('seasonalTrends').innerHTML = seasonTrend;
+
+                // E-001-F-004-S-001: AI Intake Predictions
+                const aiPrediction = Math.floor(Math.random() * (15 - 3 + 1)) + 3; // 3-15 new intakes
+                document.getElementById('aiIntakePredictions').textContent = `${aiPrediction} new intakes`;
+            };
+
+            simulateData();
+            // Refresh data every 30 seconds (for demonstration)
+            setInterval(simulateData, 30000);
+        });
+    </script>
+</body>
+</html>
